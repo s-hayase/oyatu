@@ -72,6 +72,8 @@ function loadData() {
     }
     if (localStorage.hasOwnProperty(key)) {
       keys.push(key);
+    }else{
+      return;
     }
   }
   let max = keys.reduce(function (a, b) {
