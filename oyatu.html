@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>おやつおこづかい帳</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="oyatu.css">
+</head>
+
+<body>
+  <h1>おやつおこづかい帳</h1>
+  <p>
+  <ul>
+    <li>
+      入力して追加ボタンで追加するよ</li>
+    <li>
+      チェックボタンにチェックして削除ボタンで削除できるよ
+    </li>
+    <li>
+      保存ボタンで内容を保存できるよ
+    </li>
+  </ul>
+  </p>
+  <input type="date" name="" id="tabeta-data">
+  <input type="text" id="oyatu-name">
+  <input type="number" name="" id="oyatu-nedan">
+  <button id="add">追加</button>
+
+  <div id="output-area">
+    <table>
+      <thead>
+        <tr>
+          <th>
+            ☑
+          </th>
+          <th>
+            日付
+          </th>
+          <th>
+            おやつ
+          </th>
+          <th>
+            値段
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <button id="del">削除</button>
+  <button id="save">保存</button>
+  <div id="sum-area"></div>
+  <script src="oyatu.js"></script>
+</body>
+
+</html>

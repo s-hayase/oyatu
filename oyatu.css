@@ -1,0 +1,45 @@
+
+body{
+  width: 700px;
+  margin-right: auto;
+  margin-left: 50px;
+  background-color: #f8f4e3;
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+}
+
+h1{
+  color: #e5446d;
+}
+
+p{
+  color: #2a2b2a;
+}
+
+th{
+  color: #706c61;
+}
+
+td{
+  color: #2a2b2a;
+  text-align: center;
+}
+
+button{
+  background-color: #2a2b2a;
+  color: #e5446d;
+  border: none;
+  border-radius: 5px;
+  padding: 3px 20px;
+}
+
+input[type = number]{
+  width: 70px;
+}
+
+table {
+    margin-bottom: 20px;
+}
+ 
+th {
+    height: 30px;               /* 高さ指定 */
+}
