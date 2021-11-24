@@ -72,10 +72,9 @@ function loadData() {
     }
     if (localStorage.hasOwnProperty(key)) {
       keys.push(key);
-    }else{
-      return;
     }
   }
+  if(keys.length ===0)return;
   let max = keys.reduce(function (a, b) {
     return Math.max(a, b);
   });
