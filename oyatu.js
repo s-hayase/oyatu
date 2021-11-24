@@ -74,7 +74,9 @@ function loadData() {
       keys.push(key);
     }
   }
-  if(keys.length ===0)return;
+  if(keys.length ===0){
+    return;
+  }
   let max = keys.reduce(function (a, b) {
     return Math.max(a, b);
   });
