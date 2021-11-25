@@ -38,6 +38,7 @@ addButton.onclick = () => {
 
   createTabel();
   calcSum();
+  save();
 };
 
 function calcSum() {
@@ -51,11 +52,14 @@ function calcSum() {
 
 function createTabel() {
   outputArea.querySelector('table tbody').innerText = "";
-  nowtabledata.forEach(function (tdataRow) {
+  nowtabledata.forEach(function (tdataRow,index) {
     let newRow = outputArea.querySelector('table tbody').insertRow(-1);
     let newCell = outputArea.querySelector('table tbody tr:last-child').insertCell(-1);
     let checkbox = document.createElement("input");
     checkbox.type = 'checkbox';
+    // checkbox.addEventListener(`change`,(e)=>{
+    //   alert(`test`);
+    // })
     newCell.appendChild(checkbox);
     tdataRow.forEach(function (td) {
       let newCell = outputArea.querySelector('table tbody tr:last-child').insertCell(-1);
@@ -106,6 +110,7 @@ delButton.onclick = function () {
   nowtabledata = extractouputTabel();
   createTabel();
   calcSum();
+  save();
 }
 
 function extractouputTabel() {
@@ -120,8 +125,8 @@ function extractouputTabel() {
   return table;
 }
 
-let saveButton = document.getElementById('save');
-saveButton.onclick = function(){
+
+function save(){
   localStorage.setItem(Date.now(), JSON.stringify(nowtabledata));
   alert('保存しました');
 }
