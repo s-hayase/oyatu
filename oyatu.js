@@ -54,9 +54,9 @@ function createTabel() {
   nowtabledata.forEach(function (tdataRow) {
     let newRow = outputArea.querySelector('table tbody').insertRow(-1);
     let newCell = outputArea.querySelector('table tbody tr:last-child').insertCell(-1);
-    let radiobutton = document.createElement("input");
-    radiobutton.type = 'radio';
-    newCell.appendChild(radiobutton);
+    let checkbox = document.createElement("input");
+    checkbox.type = 'checkbox';
+    newCell.appendChild(checkbox);
     tdataRow.forEach(function (td) {
       let newCell = outputArea.querySelector('table tbody tr:last-child').insertCell(-1);
       newCell.appendChild(document.createTextNode(td));
@@ -86,16 +86,16 @@ function loadData() {
 
 let delButton = document.getElementById('del');
 delButton.onclick = function () {
-  if(document.querySelectorAll('table tbody tr input[type = radio]:checked').length === 0){
+  if(document.querySelectorAll('table tbody tr input[type = checkbox]:checked').length === 0){
     alert('選択ボタンにチェックしてください');
     return;
   }
   if(!confirm('削除しても良いですか？')){
     return;
   }
-  let radiobutton = document.querySelectorAll('table tbody tr input[type = radio]');
+  let checkbox = document.querySelectorAll('table tbody tr input[type = checkbox]');
   let i =0;
-    radiobutton.forEach(function(e) {
+    checkbox.forEach(function(e) {
       if(e.checked){
         document.querySelector('table tbody').deleteRow(i);       
         return;
