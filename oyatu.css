@@ -11,6 +11,17 @@ h1{
   color: #e5446d;
 }
 
+h1::before,h1::after{
+  content: "";
+  display: inline-block;  /* blockかinline-blockに指定しないと、幅と高さの指定ができない */
+  width: 50px;  /* 幅の指定 */
+  height: 50px;  /* 高さの指定 */
+  background-image:url("img/shortcake.png");
+  background-size: cover;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
 p{
   color: #2a2b2a;
 }
