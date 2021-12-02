@@ -125,19 +125,51 @@ function save(){
 
 let modiButton = document.getElementById('modi');
 modiButton.addEventListener(`click`,()=>{
-  // let checkbox = document.querySelectorAll('table tbody tr input[type = checkbox]');
-  // let i =0;
-  //   checkbox.forEach(function(e,index) {
-  //     if(e.checked){
-  //       document.getElementById(`rowId${index}`).style.backgroundColor  = `black`;
-  //     }
-  //   });
+  let checkbox = document.querySelectorAll('table tbody tr input[type = checkbox]');
+  if(modiButton.innerText === `編集`){
+  modiButton.innerText = `完了`;
 
-  let a = document.getElementById(`rowId0`).querySelectorAll(`td`);
-  a[1].innerHTML = `<input type="date">`;
-  a[2].innerHTML = `<input type="text">`;
-  a[3].innerHTML = `<input type="text">`;
-
+  Array.from(checkbox,(e,i)=>{
+    e.disabled= true;
+    if(e.checked){
+      let checkedRow = document.getElementById(`rowId${i}`).querySelectorAll(`td`);
+      checkedRow[1].innerHTML = `<input type="date" id="id1" value=${checkedRow[1].innerText}>`;
+      checkedRow[2].innerHTML = `<input type="text" id="id2" placeholder=${checkedRow[2].innerText}>`;
+      checkedRow[3].innerHTML = `<input type="number" id="id3" placeholder=${checkedRow[3].innerText}>`;
+    }
+  });
+  return;
+  }
+  if(modiButton.innerText === `完了`){
+    let inputFlag = true;
+    Array.from(checkbox,(e,i)=>{
+      if(e.checked){
+        let checkedRow = document.getElementById(`rowId${i}`).querySelectorAll(`td`);
+        const id1 = document.querySelector(`#rowId${i} #id1`).value;
+        const id2 = document.querySelector(`#rowId${i} #id2`).value;
+        const id3 = document.querySelector(`#rowId${i} #id3`).value;
+        if(id1.length === 0||id2.length === 0||id3.length === 0){
+          inputFlag = false;
+          return ;
+        }
+        checkedRow[1].innerHTML = `<td>${document.querySelector(`#rowId${i} #id1`).value}</td>`;
+        checkedRow[2].innerHTML = `<td>${document.querySelector(`#rowId${i} #id2`).value}</td>`;
+        checkedRow[3].innerHTML = `<td>${document.querySelector(`#rowId${i} #id3`).value}</td>`;
+        e.checked = false;
+      }
+    });
+    if(inputFlag !== true){
+      alert(`未入力があります`);
+      return ;
+    }
+    checkbox.forEach((e)=>{e.disabled= false;});
+    nowtabledata = extractouputTabel();
+    nowtabledata.sort(function (a, b) {
+      return (a[0] > b[0] ? 1 : -1);
+    });
+    createTabel();
+    calcSum();
+    modiButton.innerText = `編集`;
+    return;
+  }
 });
-//document.getElementById(`rowId0`).querySelector(`td`).innerHTML = `<input type="text">`;
-
