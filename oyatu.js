@@ -7,10 +7,8 @@ let sumArea = document.getElementById('sum-area');
 
 let nowtabledata = [];
 
-if (confirm('読み込みますか？')) {
   loadData();
   calcSum();
-}
 
 let addButton = document.getElementById('add');
 addButton.onclick = () => {
@@ -54,12 +52,10 @@ function createTabel() {
   outputArea.querySelector('table tbody').innerText = "";
   nowtabledata.forEach(function (tdataRow,index) {
     let newRow = outputArea.querySelector('table tbody').insertRow(-1);
+    newRow.setAttribute(`id`,`rowId${index}`);
     let newCell = outputArea.querySelector('table tbody tr:last-child').insertCell(-1);
     let checkbox = document.createElement("input");
     checkbox.type = 'checkbox';
-    // checkbox.addEventListener(`change`,(e)=>{
-    //   alert(`test`);
-    // })
     newCell.appendChild(checkbox);
     tdataRow.forEach(function (td) {
       let newCell = outputArea.querySelector('table tbody tr:last-child').insertCell(-1);
@@ -89,7 +85,7 @@ function loadData() {
 }
 
 let delButton = document.getElementById('del');
-delButton.onclick = function () {
+delButton.addEventListener(`click`,()=> {
   if(document.querySelectorAll('table tbody tr input[type = checkbox]:checked').length === 0){
     alert('選択ボタンにチェックしてください');
     return;
@@ -98,20 +94,16 @@ delButton.onclick = function () {
     return;
   }
   let checkbox = document.querySelectorAll('table tbody tr input[type = checkbox]');
-  let i =0;
-    checkbox.forEach(function(e) {
-      if(e.checked){
-        document.querySelector('table tbody').deleteRow(i);       
-        return;
-      }
-      i++;
-    });
-  
+  Array.from(checkbox,(e,i)=>{
+    if(e.checked){
+      document.querySelector('table tbody').deleteRow(i);
+    }
+  });
   nowtabledata = extractouputTabel();
   createTabel();
   calcSum();
   save();
-}
+});
 
 function extractouputTabel() {
   let table = [];
@@ -130,3 +122,22 @@ function save(){
   localStorage.setItem(Date.now(), JSON.stringify(nowtabledata));
   alert('保存しました');
 }
+
+let modiButton = document.getElementById('modi');
+modiButton.addEventListener(`click`,()=>{
+  // let checkbox = document.querySelectorAll('table tbody tr input[type = checkbox]');
+  // let i =0;
+  //   checkbox.forEach(function(e,index) {
+  //     if(e.checked){
+  //       document.getElementById(`rowId${index}`).style.backgroundColor  = `black`;
+  //     }
+  //   });
+
+  let a = document.getElementById(`rowId0`).querySelectorAll(`td`);
+  a[1].innerHTML = `<input type="date">`;
+  a[2].innerHTML = `<input type="text">`;
+  a[3].innerHTML = `<input type="text">`;
+
+});
+//document.getElementById(`rowId0`).querySelector(`td`).innerHTML = `<input type="text">`;
+
