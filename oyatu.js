@@ -10,8 +10,16 @@ let nowtabledata = [];
   loadData();
   calcSum();
 
-let addButton = document.getElementById('add');
-addButton.onclick = () => {
+let endofthismonth = new Date();
+endofthismonth.setMonth(endofthismonth.getMonth() + 1);
+endofthismonth.setDate(0);
+const inputDate =  document.querySelector(`input[type=date]`);
+
+inputDate.setAttribute(`min`,`${endofthismonth.getFullYear()}-${endofthismonth.getMonth() + 1}-01`);
+inputDate.setAttribute(`max`,`${endofthismonth.getFullYear()}-${endofthismonth.getMonth() + 1}-${endofthismonth.getDate()}`);
+
+const addButton = document.getElementById('add');
+addButton.addEventListener(`click`,()=>{
   let date = tabetaData.value;
   if (date.length === 0) {
     return;
@@ -37,7 +45,7 @@ addButton.onclick = () => {
   createTabel();
   calcSum();
   save();
-};
+});
 
 function calcSum() {
   let sum = 0;
@@ -84,8 +92,11 @@ function loadData() {
   createTabel();
 }
 
-let delButton = document.getElementById('del');
+const delButton = document.getElementById('del');
 delButton.addEventListener(`click`,()=> {
+  if(modiButton.innerText !== `編集`){
+    return ;
+  }
   if(document.querySelectorAll('table tbody tr input[type = checkbox]:checked').length === 0){
     alert('選択ボタンにチェックしてください');
     return;
@@ -123,7 +134,7 @@ function save(){
   alert('保存しました');
 }
 
-let modiButton = document.getElementById('modi');
+const modiButton = document.getElementById('modi');
 modiButton.addEventListener(`click`,()=>{
   let checkbox = document.querySelectorAll('table tbody tr input[type = checkbox]');
   if(modiButton.innerText === `編集`){
