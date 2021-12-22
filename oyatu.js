@@ -75,20 +75,16 @@ function createTabel() {
 function loadData() {
   let keys = [];
   for (key in localStorage) {
-    if (key === 'weblioObjFlg') {
-      localStorage.removeItem('weblioObjFlg');
-    }
-    if (localStorage.hasOwnProperty(key)) {
+    if (key.search(/oyatu/g) !== -1){
+      key = key.replace(/oyatu/g, '');
       keys.push(key);
     }
   }
-  if(keys.length ===0){
-    return;
-  }
+  if(keys.length ===0) return;
   let max = keys.reduce(function (a, b) {
     return Math.max(a, b);
   });
-  nowtabledata = JSON.parse(localStorage.getItem(max));
+  nowtabledata = JSON.parse(localStorage.getItem(`oyatu${max}`));
   createTabel();
 }
 
@@ -130,8 +126,7 @@ function extractouputTabel() {
 
 
 function save(){
-  localStorage.setItem(Date.now(), JSON.stringify(nowtabledata));
-  alert('保存しました');
+  localStorage.setItem(`oyatu${Date.now()}`, JSON.stringify(nowtabledata));
 }
 
 const modiButton = document.getElementById('modi');
@@ -180,6 +175,7 @@ modiButton.addEventListener(`click`,()=>{
     });
     createTabel();
     calcSum();
+    save();
     modiButton.innerText = `編集`;
     return;
   }
